@@ -14,7 +14,7 @@ class UserController extends Controller
         $database_connection = config('database.default');
         config(['database.default' => 'pgsql']);
         MainUser::create([
-            'user_name' => "gaoun12@yopmail.com",
+            'email' => "gaoun12@yopmail.com",
             'password' => Hash::make('123456'),
             'table_connection' => 'DB_DATABASE_US'
         ]);
@@ -26,5 +26,12 @@ class UserController extends Controller
             "email" => "gaoun12@yopmail.com"
         ]);
 
+    }
+
+    public function index()
+    {
+        $database_connection = config('database.default');
+        config(['database.default' => 'pgsql']);
+        MainUser::get();
     }
 }

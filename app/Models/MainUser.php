@@ -10,8 +10,26 @@ class MainUser extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_name',
+        'email',
         'password',
         'table_connection'
     ];
+
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        //-- creating
+        static::retrieved(function ($model) {
+
+            $database_connection = config('database.default');
+            config(['database.default' => $model->table_connection]);
+
+            $person = Person::where('email', $model->email)->first();
+            $model->first_name = $person->first_name;
+            $model->last_name = $person->last_name;
+        });
+    }
 }

@@ -24,7 +24,8 @@ Route::group(
         'middleware' => ['api'],
     ],
     function () {
-        Route::get('/store',                                                  [UserController::class, 'store']);
+        Route::post('/store',                                                  [UserController::class, 'store']);
+        Route::get('/index',                                                  [UserController::class, 'index']);
 
     }
 );
